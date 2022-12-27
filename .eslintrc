@@ -1,0 +1,20 @@
+{
+    "root": true,
+    "extends": ["plugin:@typescript-eslint/recommended","eslint:recommended"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {"project": ["./tsconfig.json"], "ecmaVersion": "latest", "sourceType": "module"},
+    "env": {
+        "es6": true,
+        "node": true,
+        "browser": true,
+        "jasmine": true 
+    },
+    "plugins": ["@typescript-eslint"],
+    "rules": {
+        "semi": ["warn", "always"],
+        "quotes": ["warn", "single"],
+        "curly": ["warn", "all"],
+        "eqeqeq": "warn"
+
+    }
+}
