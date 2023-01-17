@@ -1,5 +1,4 @@
 import pool from '../database';
-//const chalk = import('chalk')
 
 export type book = {
 	//id: number;

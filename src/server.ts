@@ -1,16 +1,26 @@
 import express from 'express';
-import { PORT, HOST } from './config.js';
-
-const SERVER_PORT = PORT as unknown as number;
-const SERVER_HOST = HOST as string;
+import { SERVER_PORT, HOST } from './config';
+import userRoutes from './routes/UserRoute';
+import productRoutes from './routes/ProductRoute';
+import cors from 'cors';
 
 const app = express();
+
+const corsOptions = {
+	origin: '*',
+	optionsSuccessStatus: 200,
+};
+
 app.get('/', (req: express.Request, res: express.Response): void => {
 	res.send('Root Endpoint Working...');
 });
 
-app.listen(SERVER_PORT, SERVER_HOST, (): void => {
-	console.log(`Running on http://${HOST}:${PORT}`);
+app.use(cors(corsOptions));
+userRoutes(app);
+productRoutes(app);
+
+app.listen(SERVER_PORT, HOST, (): void => {
+	console.log(`Running on http://${HOST}:${SERVER_PORT}`);
 });
 
 export default app;

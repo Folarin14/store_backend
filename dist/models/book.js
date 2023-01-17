@@ -41,7 +41,6 @@ class BookStore {
                 b.type,
                 b.summary,
             ]);
-            console.log('Loggng create results', result.rows[0]);
             conn.release();
             return result.rows[0];
         }

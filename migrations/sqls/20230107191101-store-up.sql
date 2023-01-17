@@ -1,0 +1,3 @@
+CREATE TABLE Users (id SERIAL PRIMARY KEY, first_name VARCHAR, last_name VARCHAR, password TEXT);
+CREATE TABLE Products (id SERIAL PRIMARY KEY, name VARCHAR, price INTEGER, category VARCHAR (50));
+CREATE TABLE Orders (id SERIAL PRIMARY KEY, product_id INTEGER, quantity INTEGER, user_id INTEGER, order_status VARCHAR, FOREIGN KEY (product_id) REFERENCES Products(id), FOREIGN KEY (user_id) REFERENCES Users(id));

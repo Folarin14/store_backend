@@ -1,0 +1,1 @@
+CREATE TABLE Orders (id SERIAL PRIMARY KEY, product_id INTEGER, quantity INTEGER, user_id INTEGER, order_status VARCHAR)
