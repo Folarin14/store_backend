@@ -6,18 +6,27 @@ import { UserModel } from '../models/user';
 
 const usermodel = new UserModel();
 
-const index = async (req: express.Request, res: express.Response) => {
+const index = async (
+	req: express.Request,
+	res: express.Response
+): Promise<void> => {
 	const allUsers = await usermodel.index();
 	res.json(allUsers);
 };
 
-const show = async (req: express.Request, res: express.Response) => {
+const show = async (
+	req: express.Request,
+	res: express.Response
+): Promise<void> => {
 	const id = req.params.id;
 	const showUserById = await usermodel.show(id);
 	res.json(showUserById);
 };
 
-const create = async (req: express.Request, res: express.Response) => {
+const create = async (
+	req: express.Request,
+	res: express.Response
+): Promise<void> => {
 	// unpack the request to get the item
 	const item = req.body;
 	const firstName = item.firstName;
@@ -33,7 +42,7 @@ const create = async (req: express.Request, res: express.Response) => {
 	res.set('authorization', `Bearer ${accessToken}`).sendStatus(201);
 };
 
-const userRoutes = (app: express.Application) => {
+const userRoutes = (app: express.Application): void => {
 	app.get('/user', verifyUser, index);
 	app.get('/user/:id', verifyUser, show);
 	app.post('/user', express.json(), create);

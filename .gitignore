@@ -1,5 +1,5 @@
 /node_modules
 package-lock.json
 .env
-database.json
 testing_template.ts
+README_ProjectInstructions.md

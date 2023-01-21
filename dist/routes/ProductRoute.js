@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const product_1 = require("../models/product");
 const jwt_auth_1 = require("../auth/jwt_auth");
 const productmodel = new product_1.ProductModel();
-// index, show, create endpoints
+// index, show, create and update endpoints
 const index = async (_req, res) => {
     const allProducts = await productmodel.index();
     res.json(allProducts);
@@ -19,7 +19,6 @@ const show = async (req, res) => {
 };
 const create = async (req, res) => {
     const item = req.body;
-    console.log('Product create endpoint request body', item);
     await productmodel.create(item);
     res.sendStatus(201);
 };

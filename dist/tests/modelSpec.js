@@ -2,9 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const product_1 = require("../models/product");
 const user_1 = require("../models/user");
+const order_1 = require("../models/order");
 // import { verifyPassword } from '../hashing/password_hash';
 const userModel = new user_1.UserModel();
 const productModel = new product_1.ProductModel();
+const ordermodel = new order_1.OrderModel();
 describe('Check User Model', () => {
     it('checks that the index is defined', async () => {
         expect(userModel.index).toBeDefined();
@@ -67,5 +69,69 @@ describe('Check Product Model', () => {
                 category: 'grocery',
             },
         ]);
+    });
+});
+describe('Check Order Model', () => {
+    it('checks that index is defined', async () => {
+        expect(ordermodel.index).toBeDefined();
+    });
+    it('checks if a new order can be created successfully', async () => {
+        const result = await ordermodel.create({
+            productID: '1',
+            quantity: 2,
+            userID: '1',
+            status: 'active',
+        });
+        expect(result).toEqual({
+            //@ts-ignore
+            id: 1,
+            product_id: 1,
+            quantity: 2,
+            user_id: 1,
+            order_status: 'active',
+        });
+    });
+    it('checks if you can query by user id', async () => {
+        const result = await ordermodel.show('1');
+        expect(result).toEqual([
+            {
+                //@ts-ignore
+                id: 1,
+                product_id: 1,
+                quantity: 2,
+                user_id: 1,
+                order_status: 'active',
+            },
+        ]);
+    });
+    it('checks if you can show all items in a database', async () => {
+        const result = await ordermodel.index();
+        expect(result).toEqual([
+            {
+                //@ts-ignore
+                id: 1,
+                product_id: 1,
+                quantity: 2,
+                user_id: 1,
+                order_status: 'active',
+            },
+        ]);
+    });
+    it('Checks if you can update/edit a row in the database', async () => {
+        const testItem = {
+            productID: '1',
+            quantity: 5,
+            userID: '1',
+            status: 'complete',
+        };
+        const result = await ordermodel.update('1', testItem);
+        expect(result).toEqual({
+            //@ts-ignore
+            id: 1,
+            product_id: 1,
+            quantity: 5,
+            user_id: 1,
+            order_status: 'complete',
+        });
     });
 });

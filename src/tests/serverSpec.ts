@@ -21,24 +21,27 @@ describe('Testing API Endpoint', (): void => {
 	});
 
 	it('checks if the user endpoint returns all data in database', async () => {
-		const response = await request.get('/user')
-                                      .set('authorization', TEST_TOKEN);
+		const response = await request
+			.get('/user')
+			.set('authorization', TEST_TOKEN);
 		expect(response.body).toHaveSize(2);
 	});
 	it('checks if the user endpoint returns specified id', async () => {
-		const response = await request.get('/user/1')
-                                      .set('authorization', TEST_TOKEN);
+		const response = await request
+			.get('/user/1')
+			.set('authorization', TEST_TOKEN);
 		expect(response.body.first_name).toBe('Afolarin');
 	});
 
 	// Testing products endpoint
 	it('checks if a product can be created successfully', async () => {
-		const response = await request.post('/product')
-                                      .set('authorization', TEST_TOKEN);
+		const response = await request
+			.post('/product')
+			.set('authorization', TEST_TOKEN);
 		expect(response.status).toBe(201);
 	});
 
-	it('checks if the product endpoint returns all data in database', async () => {
+	it('checks if the product endpoint returns all data in products table', async () => {
 		const response = await request.get('/product');
 		expect(response.body).toHaveSize(2);
 	});
@@ -52,13 +55,53 @@ describe('Testing API Endpoint', (): void => {
 			category: 'grocery',
 		});
 	});
-});
 
-// 	// it('Checks if the database connection is working', (): void => {
-// 	// 	expect(
-// 	// 		pool
-// 	// 			.connect()
-// 	// 			.then(() => console.log('Success'))
-// 	// 			.catch(() => console.log('Failure'))
-// 	// 	).toBe(Promise<void>);
-// 	// });
+	//Testing Orders endpoint
+	it('checks if an order can be created successfully', async () => {
+		const response = await request
+			.post('/order')
+			.set('authorization', TEST_TOKEN);
+		expect(response.status).toBe(201);
+	});
+	it('checks if the order endpoint returns all data in orders table', async () => {
+		const response = await request
+			.get('/order')
+			.set('authorization', TEST_TOKEN);
+		expect(response.body).toHaveSize(2);
+	});
+	it('checks if the order enpoint returns row based on specified user id', async () => {
+		const response = await request
+			.get('/order/1')
+			.set('authorization', TEST_TOKEN);
+		expect(response.body).toEqual([
+			{
+				//@ts-ignore
+				id: 1,
+				product_id: 1,
+				quantity: 5,
+				user_id: 1,
+				order_status: 'complete',
+			},
+		]);
+	});
+	it('checks if a resource/row can be updated properly', async () => {
+		const testItem = {
+			productID: '1',
+			quantity: 7,
+			userID: '1',
+			status: 'active',
+		};
+		const response = await request
+			.put('/order/1')
+			.send(testItem)
+			.set('authorization', TEST_TOKEN);
+		expect(response.body).toEqual({
+			//@ts-ignore
+			id: 1,
+			product_id: 1,
+			quantity: 7,
+			user_id: 1,
+			order_status: 'active',
+		});
+	});
+});

@@ -7,7 +7,7 @@ const verifyUser = function (
 	res: express.Response,
 	next: express.NextFunction
 ): void {
-	const auth = req.headers['authorization'];
+	const auth = req.headers['authorization'] as string;
 	const token = auth?.split(' ')[1];
 	if (!token) {
 		res.sendStatus(401);

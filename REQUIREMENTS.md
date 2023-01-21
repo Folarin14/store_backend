@@ -43,10 +43,22 @@ These are the notes from a meeting with the frontend developer that describe wha
 #### Tables
 - Users (id: SERIAL PRIMARY KEY, first_name: VARCHAR, last_name: VARCHAR, password: VARCHAR)
 - Products (id: SERIAL PRIMARY KEY name: VARCHAR, price: INTEGER, category: VARCHAR)
-- Orders ()
+- Orders (id: SERIAL PRIMARY KEY, product_id: INTEGER, quantity: INTEGER, user_id: INTEGER, FOREIGN KEY (product_id) REFERENCES Products(id), FOREIGN KEY (user_id) REFERENCES Users(id))
 
-#### REST Routes
-- INDEX
-- SHOW
-- CREATE
+## REST Routes
+#### Users
+- INDEX - '/user' [GET]
+- SHOW - '/user/:id' [GET]
+- CREATE - '/user' [POST]
 
+#### Products
+- INDEX - '/product' [GET]
+- SHOW - '/product/:id' [GET]
+- CREATE - '/product' [POST]
+
+#### Orders
+- INDEX - '/order' [GET]
+- SHOW - '/order/:id' [GET] [id here represents user_id]
+- CREATE - '/order' [POST]
+- UPDATE - '/order/:id' [PUT]
+- DELETE - '/order/:id' [DELETE]
