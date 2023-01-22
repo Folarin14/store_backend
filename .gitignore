@@ -3,3 +3,4 @@ package-lock.json
 .env
 testing_template.ts
 README_ProjectInstructions.md
+/dist

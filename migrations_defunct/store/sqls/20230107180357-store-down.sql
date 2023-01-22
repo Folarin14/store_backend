@@ -1,3 +1,0 @@
-DROP TABLE Orders;
-DROP TABLE Products;
-DROP TABLE Users;
