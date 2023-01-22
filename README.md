@@ -6,11 +6,11 @@ This repo contains the backend of a simple store built using Typescript, Node an
 
 
 ## Setup
-This backend does not use a docker, so you should have a local installation of postgres on your system which defaults to port 5432. If you choose to use a docker to host the database, make sure your container port is properly matched to the host port. If you use a different port for your postgres and local server, change the **PG_PORT** and **PORT** in the environment variable respectively below. Please make sure the database **node_store_db** already exists before running `npm run start` which spins up the migration sequence to add the required table. if you choose to go with a different DB name, make sure you change the **PG_DATABASE** parameter in the **.env** file. This setup **WILL NOT** create the database for you. 
+This backend does not use a docker, so you should have a local installation of postgres on your system which defaults to port 5432. If you choose to use a docker to host the database, make sure your container port is properly matched to the host port. This application uses a postgres database server running at port **5432** and web server running at port **8090**. Please endure this ports are available on your system but If you choose to use a different port for your postgres and local server, change the **PG_PORT** and **PORT** in the environment variable respectively below. The **PG_USERNAME** and **PG_PASSWORD** should be changed to your local postgres username and password (preferably, your username should have superuser privileges). if you choose to go with a different DB name, make sure you change the **PG_DATABASE** parameter in the **.env** file. On running the command `npm run start`, the database specified in the **.env** file is created first, and then tables are added via migration files before the web server goes live. This setup **WILL** create the database for you. if you do not have postgres on your local system, kindly install via this link: https://www.postgresql.org/download/ and take not of your username (likely postgres) and password before proceeding with this setup.
 
 
 ## Environment Variables
-The following environment variables are required to make the backend work as expected. Please save this in a **.env** file before running the backend:
+The following environment variables are required to make the backend work as expected. Please save this in a **.env** file before running the backend. Again, ensure you change the **PG_USERNAME** and **PG_PASSWORD** to your own postgres username and password otherwise it will throw an error.
 
 - NODE_ENV=development
 - LOCALHOST="127.0.0.1"

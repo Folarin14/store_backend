@@ -40,10 +40,15 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 - status of order (active or complete)
 
+#### Orders_Products
+ - order_id
+ - product_id
+
 #### Tables
-- Users (id: SERIAL PRIMARY KEY, first_name: VARCHAR, last_name: VARCHAR, password: VARCHAR)
-- Products (id: SERIAL PRIMARY KEY name: VARCHAR, price: INTEGER, category: VARCHAR)
-- Orders (id: SERIAL PRIMARY KEY, product_id: INTEGER, quantity: INTEGER, user_id: INTEGER, FOREIGN KEY (product_id) REFERENCES Products(id), FOREIGN KEY (user_id) REFERENCES Users(id))
+- Users (id: integer pkey, first_name: character varying, last_name: character varying, password: character varying)
+- Products (id: integer pkey, name: character varying, price: REAL, category: character varying(50))
+- Orders (id: integer pkey, product_id: integer, quantity: integer, user_id: integer, order_status: character varying ,FOREIGN KEY (product_id) REFERENCES Products(id), FOREIGN KEY (user_id) REFERENCES Users(id))
+- Orders_Products (order_id: integer, product_id: integer, FOREIGN KEY (order_id) REFERENCES Orders(id), FOREIGN KEY (product_id) REFERENCES Products(id), PRIMARY KEY(order_id, product_id))
 
 ## REST Routes
 #### Users
